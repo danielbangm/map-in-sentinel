@@ -51,5 +51,7 @@ I downloaded this <a href="https://github.com/joshmadakor1/Sentinel-Lab/blob/mai
 After getting your own API key, launch powershell ISE and run the script in Vm. The API keyy allows us to get the geolocalisation and longitute, latitude of the attackers. Essentially what it does, it looks through the event logs, security logs, then grabs all the events of people who failed to log in and grabs their IP address, and geolocalisation data to create a new log file
 ![image](https://github.com/danielbangm/map-in-sentinel/assets/22795502/10569e1e-3b84-41c7-8610-99d53730836a)
 
+- Step 5: Create a custom log in our log analytic workspaces
 
+  I go backt to portal.azure, let's reate a custom log inside our log analytic workspace that will allow us to bring that custom log with geodata into our logs analytic workspaces. For that we also need to copy the log data from our VM located in C:\ProgramData\failed_rdp.log
 
