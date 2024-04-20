@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://shorturl.at/kBILY" />
+<img src="https://shorturl.at/jmuv1" />
 </p>
 
 <h1>Setup map in Azure sentinel with Latitude and Longitude</h1>
@@ -10,7 +10,7 @@ I will download a powershell script from github to run in our Honeypot virtual m
 
 -  Understanding event logs
 -  Understanding the use of windows Defender Firewall
--  Gain a better understanding on how to run a script with powershell ISE
+-  Gain a better understanding of how to run a script with powershell ISE
 
 <h2>Environments and Technologies Used</h2>
 
