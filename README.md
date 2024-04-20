@@ -53,5 +53,7 @@ After getting your own API key, launch powershell ISE and run the script in Vm. 
 
 - Step 5: Create a custom log in our log analytic workspaces
 
-  I go backt to portal.azure, let's reate a custom log inside our log analytic workspace that will allow us to bring that custom log with geodata into our logs analytic workspaces. For that we also need to copy the log data from our VM located in C:\ProgramData\failed_rdp.log
+  I go backt to portal.azure, let's reate a custom log inside our log analytic workspace that will allow us to bring that custom log with geodata into our logs analytic workspaces. For that we also need to copy the log data from our VM located in C:\ProgramData\failed_rdp.log and paste it in a new word document in our local machine . Now let's create a custom log named "FAILED_RDP_WITH_GEO_CL"
+  ![image](https://github.com/danielbangm/map-in-sentinel/assets/22795502/790d5423-6b55-4a6e-9d8a-803632558748)
+
 
