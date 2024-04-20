@@ -2,22 +2,22 @@
 <img src="https://shorturl.at/kBILY" />
 </p>
 
-<h1>SIEM: Azure Sentinel - Prerequisites and Installation</h1>
+<h1>Setup map in Azure sentinel with Latitude and Longitude</h1>
 
-I setup Azure Sentinel (SIEM) and connect it to a live virtual machine acting as a honey pot. We will observe live attacks (RDP Brute Force) from all around the world. We will use a custom PowerShell script to look up the attackers Geolocation information and plot it on the Azure Sentinel Map! 
+I will download a powershell script from github to run in our Honeypot virtual machine to capture all event logs. For that, we will turn off windows defender firewall on vm first.
 
 <h2>Objectives</h2>
 
--  More Experience with Azure (I will Create the environment here)
--  Understanding the creation of VM, log analytic workspace, and Sentinel Azure.
--  Gain a better understanding of all parts of Active Directory such resetting passwords and setting up users.
+-  Understanding event logs
+-  Understanding the use of windows Defender Firewall
+-  Gain a better understanding on how to run a script with powershell ISE
 
 <h2>Environments and Technologies Used</h2>
 
-- Microsoft Azure (Virtual Machines/Compute)
 - Virtual Machine(Honeypot-vm)
-- log analytical workspaces(Lawhoneypot1)
-- Azure Sentinel
+- Windows Defender Firewall
+- Event logs
+- PowerShell ISE
 - Remote Desktop
 
 <h2>Operating Systems Used</h2>
