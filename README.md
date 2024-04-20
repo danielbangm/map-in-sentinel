@@ -30,25 +30,26 @@ I setup Azure Sentinel (SIEM) and connect it to a live virtual machine acting as
 
 <h2>Installation steps</h2>
 
--  Step 1: Setup Ressource group, VM and Network Security Group in Azure
+-  Step 1: Observe Event Viewer Logs in VM
 
-I am going to wwww.portal.azure.com and create a Virtual Machine(Honeypot-vm) with windows 10 installed in it with firewall(Network Security Group) set to be open to anything on the internet. The goal here is to make our VM most as vulnerable as possible to be discover by anyone on the internet.
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/5af7cf61-58b6-4e5f-892c-d1b09dd2d9a2)
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/ab5c4749-4849-4aed-be3c-b9ae132cbaaa)
+I Log in VM using RDP. Type on the menu "Event viewer". Click on windows log, and then security. From there you can see all the event success and failure. That's where we going to get the IP addresses from all the attackers to plug into Sentinel to have their geolocation.
+![image](https://github.com/danielbangm/map-in-sentinel/assets/22795502/dc3b3572-e09f-4f30-b5a4-bf36bd321744)
 
--  Step 2: Set up Log Analytics workspaces
+-  Step 2: Turn off windows Firewall on VM
 
-The purpose of this is to ingest logs from the Virtual Machine. We are going to ingest the Windows event logs and create our own custom logs that contains geographic information in order to discover where the attacker is coming from. To do that, just search for Log analytic workspaces on the portal and create one using the same ressource group. Then go on to Security center(Microsoft Defender for the Cloud) to enable the ability to gather logs from the virtual machine into the log analytic workspaces. Make sure to choose the log Analytics workspaces we just created and turn defender on and also data collection has to be set to "all". Finally go back to log Analytic workspaces and connect to the VM.
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/b5ca8d9e-57b8-4be7-87bb-03140eb1a75c)
+Log in VM and search for wf.msc on the menu. Click on Windows Defender Firewall Properties. Go to Domain profile, Private profile, Public profile and turn them off. I tried to ping my VM from my actual computer and we can see that the echo is now accepted by the VM because we turned the firewall off.
+![image](https://github.com/danielbangm/map-in-sentinel/assets/22795502/8123275d-9d3c-4385-84e6-4f4bf37fd394)
+![image](https://github.com/danielbangm/map-in-sentinel/assets/22795502/d2ad11fb-16cc-473d-8e63-b04820f558bd)
 
--  Step 3: Set up sentinel
+-  Step 3: Download the powershell script and sign up for ipgeolocalisation.io
 
-We are going to use this as our SIEM to visualize the attack data. Just type azure sentinel in the search bar and create a new sentinel. Pick the log analytic workspaces we want to connect to oour logs.
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/a4ed62a2-fa02-439a-a4df-b40116ebbec9)
+I downloaded this <a href="https://github.com/joshmadakor1/Sentinel-Lab/blob/main/Custom_Security_Log_Exporter.ps1">Powershell Script</a> which is essentially a github repository. Click on the custom securitylog exporter, either download or just copy it and then open powershell ISE on the VM. Create new file and paste it, save it on the desktop as "log exporter.The only thing to modify on that scrip is the API key. In order to get that, we have to sign up for ipgeolocalisation.io and get our API key replaced in the powershell script
+![image](https://github.com/danielbangm/map-in-sentinel/assets/22795502/ea1fef18-f0c0-49df-8258-0c24be6300bb)
 
--  Step 4: Connect to VM using Remote Desk Connection
+-  Step 4: Run the script
 
-Click on virtual machine in portal.azure and copy the public IP of the VM. Go on your desktop and launch remote desk Connection(Microsoft RDP) using the VM's public ip address , username and password we created earlier. and we have access to our virtual machine...
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/e5fa5235-7e14-47f2-ae48-4a287af9e126)
+After getting your own API key, launch powershell ISE and run the script in Vm. The API keyy allows us to get the geolocalisation and longitute, latitude of the attackers. Essentially what it does, it looks through the event logs, security logs, then grabs all the events of people who failed to log in and grabs their IP address, and geolocalisation data to create a new log file
+![image](https://github.com/danielbangm/map-in-sentinel/assets/22795502/10569e1e-3b84-41c7-8610-99d53730836a)
+
 
 
